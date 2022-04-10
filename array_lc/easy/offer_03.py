@@ -10,7 +10,11 @@ class RepeatedNumbersInArrays(object):
         :type nums: List[int]
         :rtype: int
         """
-        # nums_set = set(nums)
-        # number = nums.diffrence(nums_set)[0]
-        # return number
-        return 2
+        num_set = set()
+
+        for num in nums:
+            if num in num_set:
+                return num 
+            else:
+                num_set.add(num)
+        return None
