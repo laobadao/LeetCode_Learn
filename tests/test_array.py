@@ -5,7 +5,7 @@ Authors
 """
 
 def test_RepeatedNumbersInArrays():
-    from array_leetcode.easy.offer_03 import RepeatedNumbersInArrays
+    from array_lc.easy.offer_03 import RepeatedNumbersInArrays
 
     num = RepeatedNumbersInArrays().findRepeatNumber(nums=[2, 3, 4, 5, 6, 2])
     
