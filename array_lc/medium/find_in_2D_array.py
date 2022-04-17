@@ -16,19 +16,10 @@ class FindIn2DArray:
             3. 若 target < matrix[i][j] e.g. 20 < 30
                 根据题目规则, 则横向, 从右到左查找, j - 1
         """
-
-        row = len(matrix)
-        if row == 0:
-            return False
-
-        column = len(matrix[0])
-        if column == 0:
-            return False
-
         i = 0
-        j = column - 1
+        j = len(matrix[0]) - 1
 
-        while i < row and j >= 0:
+        while i < len(matrix) and j >= 0:
             data = matrix[i][j]
             if target == data:
                 return True
@@ -49,19 +40,10 @@ class FindIn2DArray:
             3. 若 target < matrix[i][j] e.g. 20 < 30
                 根据题目规则, 则纵向, 从下到上查找, i - 1
         """
-
-        row = len(matrix)
-        if row == 0:
-            return False
-
-        column = len(matrix[0])
-        if column == 0:
-            return False
-
         i = len(matrix) - 1
         j = 0
 
-        while i >= 0 and j < column:
+        while i >= 0 and j < len(matrix[0]):
             data = matrix[i][j]
             if target == data:
                 return True
@@ -70,4 +52,36 @@ class FindIn2DArray:
             else:
                 i -= 1
         return False
-        
+
+    def findNumberIn2DArray_official(
+        self, matrix: List[List[int]], target: int
+    ) -> bool:
+        """官方题解及语言描述
+
+        算法流程:
+            从矩阵 matrix 左下角元素(索引设为 (i, j) )开始遍历,并与目标值对比:
+                1. 当 matrix[i][j] > target 时,执行 i-- ,即消去第 i 行元素;
+                2. 当 matrix[i][j] < target 时,执行 j++ ,即消去第 j 列元素;
+                3. 当 matrix[i][j] = target 时,返回 true ,代表找到目标值。
+            若行索引或列索引越界,则代表矩阵中无目标值,返回 false。
+            每轮 i 或 j 移动后,相当于生成了“消去一行(列)的新矩阵”, 索引(i,j) 
+            指向新矩阵的左下角元素(标志数),因此可重复使用以上性质消去行(列)。
+
+            复杂度分析:
+                时间复杂度 O(M+N) :其中,N 和 M 分别为矩阵行数和列数,此算法最多循环 M+N 次。
+                空间复杂度 O(1) : i, j 指针使用常数大小额外空间。
+
+            作者:jyd
+            链接:https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/solution/mian-shi-ti-04-er-wei-shu-zu-zhong-de-cha-zhao-zuo/
+            来源:力扣(LeetCode)
+            著作权归作者所有。商业转载请联系作者获得授权,非商业转载请注明出处。
+        """
+        i, j = len(matrix) - 1, 0
+        while i >= 0 and j < len(matrix[0]):
+            if matrix[i][j] > target:
+                i -= 1
+            elif matrix[i][j] < target:
+                j += 1
+            else:
+                return True
+        return False
