@@ -38,10 +38,6 @@ def test_FindIn2DArray():
 
     assert not ret
 
-
-def test_FindIn2DArray_cases():
-    from array_lc.medium.find_in_2D_array import FindIn2DArray
-
     ret = FindIn2DArray().findNumberIn2DArray(matrix=[[5], [6]], target=4)
 
     assert not ret
